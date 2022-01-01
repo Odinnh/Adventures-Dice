@@ -1,0 +1,28 @@
+{
+  "name": "adventurers-dice",
+  "version": "1.0.0",
+  "description": "An up to 5 player Dice Game",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Odinnh/Adventures-Dice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Odinnh/Adventures-Dice/issues"
+  },
+  "homepage": "https://github.com/Odinnh/Adventures-Dice#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "socket.io": "^4.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
