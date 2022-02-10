@@ -49,7 +49,7 @@
     </style>
     <script>
         // const socket = io()
-        let times =  JSON.parse(localStorage.getItem('time'),{
+        let defaultTimes = {
             'route-t': {
                 start: '00:00',
                 end: '00:00'
@@ -70,7 +70,9 @@
                 start: '00:00',
                 end: '00:00'
             }
-        } )
+        }
+        let times = localStorage.getItem('time')||JSON.stringify(defaultTimes)
+        times = JSON.parse(times)
     
 
         function setTime(ele) {
