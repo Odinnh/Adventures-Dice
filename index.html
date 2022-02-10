@@ -12,17 +12,18 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="">
-e -->
-    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="public/style.css" type="text/css">
 
     <style>
-        body{
-            font-family:sans-serif;
-            color:black;
+        body {
+            font-family: sans-serif;
+            color: black;
         }
-        .btn{
-            padding:20px;
+
+        .btn {
+            padding: 20px;
         }
+
         #route-t {
             background: purple;
             color: white;
@@ -42,57 +43,77 @@ e -->
         }
 
         #route-b {
-            color:white;
+            color: white;
             background: rgb(8, 40, 223)
         }
     </style>
     <script>
         // const socket = io()
-        let times = {
-            'route-t':{
-                start:{00:00},
-                end:{00:00}
+        let times =  JSON.parse(localStorage.getItem('time'),{
+            'route-t': {
+                start: '00:00',
+                end: '00:00'
             },
-            'route-a':{
-                start:{00:00},
-                end:{00:00}
+            'route-a': {
+                start: '00:00',
+                end: '00:00'
             },
-            'route-z':{
-                start:{00:00},
-                end:{00:00}
+            'route-z': {
+                start: '00:00',
+                end: '00:00'
             },
-            'route-v':{
-                start:{00:00},
-                end:{00:00}
+            'route-v': {
+                start: '00:00',
+                end: '00:00'
             },
-            'route-b':{
-                start:{00:00},
-                end:{00:00}
-            },
-        }
-        let defaultTimes = times;
+            'route-b': {
+                start: '00:00',
+                end: '00:00'
+            }
+        } )
+    
 
         function setTime(ele) {
             let id = ele.getAttribute('id');
             let currentTime = new Date();
-            let time = `${currentTime.getHours()}:${currentTime.getMinutes() <=10? '0'+ currentTime.getMinutes():currentTime.getMinutes() }`;
-            if (ele.dataset.start==1){
-                times[id].end = time;
-                ele.dataset.start = 2;
-                render
+            let time = `${currentTime.getHours()}:${currentTime.getMinutes() <= 10 ? '0' + currentTime.getMinutes() : currentTime.getMinutes()}`;
+            if (ele.dataset.state != 1 && ele.dataset.state != 2) {
+                times[id].start = time;
+                ele.dataset.state = 1;
+                render();
+                return;
             }
-            if (ele.dataset.start ==2) return
-            if (ele.dataset.start ==0)
-            times[id].start = time;
-            ele.dataset.start = 1;
+            if (ele.dataset.state == 1) {
+                times[id].end = time;
+                ele.dataset.end = 2;
+                render();
+                return;
+            }
+            if (ele.dataset.state == 2) {
+                render();
+                return;
+            }
         }
-        function resetTime(){ 
-            times = defaultTimes;
+        function resetTime() {
+            for (object in times){
+                times[object].start = '00:00'
+                times[object].end = '00:00'
+            }
+            document.querySelectorAll('.route').forEach(ele => {
+                ele.dataset.state = 0
+
+            })
             render()
         }
-        function render(){ 
+        function render() {
+            localStorage.setItem('time', JSON.stringify(times))
+            document.querySelectorAll('.route').forEach(ele => {
+                let id = ele.getAttribute('id');
+                ele.querySelector('H3').innerHTML = `${times[id].start} - ${times[id].end}`;
 
+            })
         }
+        render()
     </script>
 </head>
 
@@ -128,6 +149,7 @@ e -->
         <h3>00:00</h3>
     </div>
     <div class="btn" onclick="resetTime()">RESET TIMES</div>
+    <script>render()</script>
 </body>
 
 </html>
