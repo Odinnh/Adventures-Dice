@@ -18,8 +18,8 @@
         body {
             font-family: sans-serif;
             color: black;
-            padding:0;
-            margin:0;
+            padding: 0;
+            margin: 0;
         }
 
         .reset {
@@ -32,7 +32,8 @@
             padding-bottom: 40px;
         }
 
-        .route, .reset {
+        .route,
+        .reset {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-evenly;
@@ -40,9 +41,15 @@
             align-content: center;
         }
 
-        #route-t {
+        #route-t,
+        #route-t2 {
             background: purple;
             color: white;
+        }
+
+        #route-t2 {
+            background: rgb(105, 1, 105);
+
         }
 
         #route-a {
@@ -68,10 +75,16 @@
             display: inline;
         }
     </style>
+    <link rel="stylesheet" href="print.css" type="text/css" media="print" />
+
     <script>
         // const socket = io()
         let defaultTimes = {
             'route-t': {
+                start: '00:00',
+                end: '00:00'
+            },
+            'route-t2': {
                 start: '00:00',
                 end: '00:00'
             },
@@ -132,6 +145,7 @@
             localStorage.setItem('time', JSON.stringify(times))
             document.querySelectorAll('.route').forEach(ele => {
                 let id = ele.getAttribute('id');
+                times[id] == null ? times[id] = defaultTimes[id]:times[id] = times[id];
                 ele.querySelector('H3').innerHTML = `${times[id].start} - ${times[id].end}`;
 
             })
@@ -153,6 +167,10 @@
 
     <div class="btn route" id="route-t" onclick="setTime(this)">
         <h2>ROUTE T</h2>
+        <h3>00:00 - 00:00</h3>
+    </div>
+    <div class="btn route" id="route-t2" onclick="setTime(this)">
+        <h2>ROUTE T 2</h2>
         <h3>00:00 - 00:00</h3>
     </div>
     <div class="btn route" id="route-a" onclick="setTime(this)">
