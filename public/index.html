@@ -49,20 +49,49 @@
     <script>
         // const socket = io()
         let times = {
-
+            'route-t':{
+                start:{00:00},
+                end:{00:00}
+            },
+            'route-a':{
+                start:{00:00},
+                end:{00:00}
+            },
+            'route-z':{
+                start:{00:00},
+                end:{00:00}
+            },
+            'route-v':{
+                start:{00:00},
+                end:{00:00}
+            },
+            'route-b':{
+                start:{00:00},
+                end:{00:00}
+            },
         }
+        let defaultTimes = times;
 
         function setTime(ele) {
+            let id = ele.getAttribute('id');
             let currentTime = new Date();
             let time = `${currentTime.getHours()}:${currentTime.getMinutes() <=10? '0'+ currentTime.getMinutes():currentTime.getMinutes() }`;
             if (ele.dataset.start==1){
-                ele.querySelector('H3').innerHTML += ` - ${time}`;
+                times[id].end = time;
                 ele.dataset.start = 2;
-                return
+                render
             }
             if (ele.dataset.start ==2) return
-            ele.querySelector('H3').innerHTML = time;
+            if (ele.dataset.start ==0)
+            times[id].start = time;
             ele.dataset.start = 1;
+        }
+        function resetTime(){ 
+            times = defaultTimes;
+            render()
+        }
+        function render(){ 
+
         }
     </script>
 </head>
@@ -78,26 +107,27 @@
             <a href="" class="btn join"></a>
         </div> -->
 
-    <div class="btn" id="route-t" onclick="setTime(this)">
+    <div class="btn route" id="route-t" onclick="setTime(this)">
         <h2>TILBURG</h2>
-        <h3>00:00</h3>
+        <h3>00:00 - 00:00</h3>
     </div>
-    <div class="btn" id="route-a" onclick="setTime(this)">
+    <div class="btn route" id="route-a" onclick="setTime(this)">
         <h2>ALKMAAR</h2>
-        <h3>00:00</h3>
+        <h3>00:00 - 00:00</h3>
     </div>
-    <div class="btn" id="route-z" onclick="setTime(this)">
+    <div class="btn route" id="route-z" onclick="setTime(this)">
         <h2>ZWOLLE</h2>
         <h3>00:00</h3>
     </div>
-    <div class="btn" id="route-v" onclick="setTime(this)">
-        <h2>VENENDAAL</h2>
+    <div class="btn route" id="route-v" onclick="setTime(this)">
+        <h2>VENEN</h2>
         <h3>00:00</h3>
     </div>
-    <div class="btn" id="route-b" onclick="setTime(this)">
+    <div class="btn route" id="route-b" onclick="setTime(this)">
         <h2>BERKEL</h2>
         <h3>00:00</h3>
     </div>
+    <div class="btn" onclick="resetTime()">RESET TIMES</div>
 </body>
 
 </html>
