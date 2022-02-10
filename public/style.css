@@ -1,0 +1,88 @@
+:root {
+	--black: #17151a;
+	--black-100: #171717;
+	--black-200: #101010;
+    
+	--white: #f7f5fa;
+
+    --blue-500: #3450f0;
+    --green-500: #25b62c;
+    --yellow-500: #d7d237;
+    --red-500: #f03434;
+    --purple-500: #7044e9;
+    --grey-200: #58585838;
+    --grey-500: #909090;
+
+	--dice-width: 12vmin;
+}
+*, * > *{
+    box-sizing: border-box;
+}
+body {
+	background-color: var(--black);
+	color: var(--white);
+}
+.dice {
+	background-color: var(--black);
+	width: var(--dice-width);
+	height: var(--dice-width);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    border-radius: 3.5vmin;
+    position:relative;
+
+}
+.dice > * {
+    width:80%;
+    z-index: 3;
+}
+.dice > .rogue{
+    width:70%;
+}
+.wizard{
+    fill: var(--purple-500);
+}
+.viking{
+    fill: var(--red-500);
+}
+.paladin{
+    fill: var(--grey-500);
+}
+.rogue{
+    fill: var(--yellow-500);
+}
+.hunter{
+    fill: var(--green-500);
+}
+.knight{
+    fill: var(--blue-500);
+}
+
+.dice::before{
+    content:'';
+    background-color: var(--black-200);
+    width: var(--dice-width);
+	height: var(--dice-width);
+    position:absolute;
+    border-radius: 2vmin;
+
+    z-index: -1;
+}
+.container {
+	display: flex;
+    margin-inline: auto;
+    width:80vw;
+}
+.dicetray {
+    position: relative;
+	display: flex;
+    gap:1em;
+    background:var(--grey-200);
+    padding:2em;
+    z-index: 1;
+}
+[data-selected="true"]::before{
+    outline:1px solid var(--white);
+    outline-offset: 5px;
+}
